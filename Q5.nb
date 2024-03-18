@@ -1,0 +1,210 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      6515,        200]
+NotebookOptionsPosition[      5935,        182]
+NotebookOutlinePosition[      6336,        198]
+CellTagsIndexPosition[      6293,        195]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ClearAll", "[", "\"\<Global`*\>\"", "]"}], "\[IndentingNewLine]", 
+  "\n", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Definindo", " ", "as", " ", "fun\[CCedilla]\[OTilde]es", " ", 
+    "objetivo"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"objectives", "=", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"x1", "+", "x2"}], ",", 
+      RowBox[{
+       RowBox[{"-", "x1"}], "-", "x2"}], ",", "x1"}], "}"}]}], ";"}], 
+  "\[IndentingNewLine]", "\n", 
+  RowBox[{"(*", 
+   RowBox[{"Definindo", " ", "as", " ", "restri\[CCedilla]\[OTilde]es"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"constraints", "=", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"2", " ", "x1"}], "+", "x2"}], ">=", "1"}], ",", 
+      RowBox[{
+       RowBox[{"x1", "+", 
+        RowBox[{"3", " ", "x2"}]}], ">=", "1"}], ",", 
+      RowBox[{"x1", ">=", "0"}], ",", 
+      RowBox[{"x2", ">=", "0"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+  "\n", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Fun\[CCedilla]\[ATilde]o", " ", "para", " ", "resolver", " ", "o", " ", 
+    "problema", " ", "de", " ", "otimiza\[CCedilla]\[ATilde]o"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"solveProblem", "[", "f_", "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"result", ",", "optimalValue", ",", "optimalPoint"}], "}"}], 
+      ",", 
+      RowBox[{
+       RowBox[{"result", "=", 
+        RowBox[{"Minimize", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"f", ",", "constraints"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"x1", ",", "x2"}], "}"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"optimalValue", "=", 
+        RowBox[{"First", "[", "result", "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"optimalPoint", "=", 
+        RowBox[{"Last", "[", "result", "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"optimalPoint", ",", "optimalValue"}], "}"}]}]}], "]"}]}], 
+   ";"}], "\[IndentingNewLine]", "\n", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Resolvendo", " ", "o", " ", "problema", " ", "para", " ", "cada", " ", 
+    "fun\[CCedilla]\[ATilde]o", " ", "objetivo"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"results", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"solveProblem", "[", "f", "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"f", ",", "objectives"}], "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", "\n", 
+  RowBox[{"(*", 
+   RowBox[{"Criando", " ", "a", " ", "tabela"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"table", "=", 
+    RowBox[{"Prepend", "[", 
+     RowBox[{
+      RowBox[{"Transpose", "[", 
+       RowBox[{"{", 
+        RowBox[{"objectives", ",", 
+         RowBox[{"results", "[", 
+          RowBox[{"[", 
+           RowBox[{"All", ",", "1"}], "]"}], "]"}], ",", 
+         RowBox[{"results", "[", 
+          RowBox[{"[", 
+           RowBox[{"All", ",", "2"}], "]"}], "]"}]}], "}"}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+       "\"\<Fun\[CCedilla]\[ATilde]o Objetivo\>\"", ",", 
+        "\"\<Conjunto \[CapitalOAcute]timo\>\"", ",", 
+        "\"\<Valor \[CapitalOAcute]timo\>\""}], "}"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]", "\n", 
+  RowBox[{"(*", 
+   RowBox[{"Imprimindo", " ", "a", " ", "tabela"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Grid", "[", 
+  RowBox[{"table", ",", 
+   RowBox[{"Frame", "->", "All"}], ",", 
+   RowBox[{"Alignment", "->", "Left"}]}], "]"}], "\n"}], "Input",
+ CellChangeTimes->{{3.91972548969841*^9, 3.919725489699411*^9}},
+ CellLabel->
+  "In[115]:=",ExpressionUUID->"c8a5b993-ebe2-46d1-a7fc-b9702f4f878a"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Minimize", "natt", 
+   "\"The minimum is not attained at any point satisfying the given \
+constraints.\"", 2, 119, 10, 24320390387720118094, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.9197254908473206`*^9},
+ CellLabel->
+  "During evaluation of \
+In[115]:=",ExpressionUUID->"67ff0d3d-c9bf-465b-9948-5ed7dbf72934"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"Fun\[CCedilla]\[ATilde]o Objetivo\"\>", "\<\"Conjunto \
+\[CapitalOAcute]timo\"\>", "\<\"Valor \[CapitalOAcute]timo\"\>"},
+    {
+     RowBox[{"x1", "+", "x2"}], 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"x1", "\[Rule]", 
+        FractionBox["2", "5"]}], ",", 
+       RowBox[{"x2", "\[Rule]", 
+        FractionBox["1", "5"]}]}], "}"}], 
+     FractionBox["3", "5"]},
+    {
+     RowBox[{
+      RowBox[{"-", "x1"}], "-", "x2"}], 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"x1", "\[Rule]", "Indeterminate"}], ",", 
+       RowBox[{"x2", "\[Rule]", "Indeterminate"}]}], "}"}], 
+     RowBox[{"-", "\[Infinity]"}]},
+    {"x1", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"x1", "\[Rule]", "0"}], ",", 
+       RowBox[{"x2", "\[Rule]", "1"}]}], "}"}], "0"}
+   },
+   AutoDelete->False,
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output",
+ CellChangeTimes->{3.919725490856841*^9},
+ CellLabel->
+  "Out[121]=",ExpressionUUID->"8c2d94c8-a7b2-4bb1-bd67-d0c874bf9217"]
+}, Open  ]]
+},
+WindowSize->{1440, 741.75},
+WindowMargins->{{-6, Automatic}, {Automatic, -6}},
+FrontEndVersion->"13.3 for Microsoft Windows (64-bit) (June 3, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"9e078824-09bb-4fde-ae35-ca534c4e78fd"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 3795, 110, 564, "Input",ExpressionUUID->"c8a5b993-ebe2-46d1-a7fc-b9702f4f878a"],
+Cell[4378, 134, 373, 9, 28, "Message",ExpressionUUID->"67ff0d3d-c9bf-465b-9948-5ed7dbf72934"],
+Cell[4754, 145, 1165, 34, 123, "Output",ExpressionUUID->"8c2d94c8-a7b2-4bb1-bd67-d0c874bf9217"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
