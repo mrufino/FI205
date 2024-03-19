@@ -1,0 +1,35 @@
+#Resolvendo o problema 6.
+import cvxpy as cp
+import numpy as np
+
+# Problem data.
+A = np.array([[0, 0, 0, 1],
+              [0, 0, 1, 0],
+              [0, 1, 0, 0],
+              [1, 0, 0, 0]])
+
+B = np.array([[1, 0, 0, 0],
+              [0, -1, 0, 0],
+              [0, 0, -1, 0],
+              [0, 0, 0, 1]])
+
+# Variável de otimização
+X = cp.Variable((4, 4), PSD=True)  # Definindo X como uma matriz semidefinida positiva (PSD)
+
+# Definição do problema de otimização
+fo = cp.Maximize(cp.trace(A @ X)) #função objetivo
+fi = [cp.trace(B @ X) == 1, cp.trace(X) == 1, X >> 0]  # vínculos
+problem = cp.Problem(fo, fi) 
+
+# Resolvendo o problema
+problem.solve()
+
+# Verificando o status da solução
+if problem.status == cp.OPTIMAL:
+    # Imprimindo o valor ótimo encontrado e a matriz X
+    print("Valor ótimo encontrado:", problem.value)
+    print("Matriz X ótima:")
+    print(X.value)
+else:
+    print("O problema não foi resolvido de forma ótima.")
+
